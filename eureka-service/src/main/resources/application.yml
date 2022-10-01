@@ -1,0 +1,26 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+
+#Configuracion para que no se autoregistre como cliente.
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+
+#Exposicion de endpoints por default de Actuator.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#Informacion del microservicio.
+info:
+  app:
+    name: Eureka Service
+    description: Servicio de registro y autodescubrimiento de microservicios.
+    version: 0.0.1 SNAPSHOT
