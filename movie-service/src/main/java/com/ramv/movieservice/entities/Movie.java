@@ -1,12 +1,10 @@
 package com.ramv.movieservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -23,6 +21,7 @@ public class Movie {
 
     private String genre;
 
+    @Column(name = "url_stream")
     private String urlStream;
 
     @Override
