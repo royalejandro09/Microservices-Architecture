@@ -6,11 +6,13 @@ import com.ramv.movieservice.exceptions.MovieNotFoundException;
 import com.ramv.movieservice.mappers.MovieMapper;
 import com.ramv.movieservice.repository.IMovieRepository;
 import com.ramv.movieservice.services.IMovieService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class MovieService implements IMovieService {
 
@@ -63,7 +65,7 @@ public class MovieService implements IMovieService {
     @Override
     public List<MovieDTO> getAllMovies() {
         List<Movie> listMovies = movieRepository.findAll();
-
+        log.info(String.format("Las movies %s ", listMovies));
         return mapper.listToDto(listMovies);
     }
 }

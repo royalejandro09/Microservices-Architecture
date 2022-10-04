@@ -12,13 +12,8 @@ import java.util.stream.Collectors;
 @Component
 public class MovieMapper {
 
-    private final ModelMapper modelMapper;
-
-
     @Autowired
-    public MovieMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
+    private ModelMapper modelMapper;
 
     /**
      * Dto to Entity.
@@ -43,7 +38,8 @@ public class MovieMapper {
      */
     public List<Movie> listToEntity(List<MovieDTO> dtos) {
 
-        List<Movie> entities = dtos.stream()
+        List<Movie> entities = dtos
+                .stream()
                 .map(dto -> toEntity(dto))
                 .collect(Collectors.toList());
 
@@ -55,7 +51,8 @@ public class MovieMapper {
      */
     public List<MovieDTO> listToDto(List<Movie> entities) {
 
-        List<MovieDTO> dtos = entities.stream()
+        List<MovieDTO> dtos = entities
+                .stream()
                 .map(entity -> toDto(entity))
                 .collect(Collectors.toList());
 

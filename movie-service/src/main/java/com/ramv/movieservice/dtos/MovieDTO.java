@@ -1,10 +1,14 @@
 package com.ramv.movieservice.dtos;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MovieDTO {
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
 
     private String name;
