@@ -1,0 +1,13 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: movie-service
+      
+
+info:
+  app:
+    name: Movie Service
+    description:  Service for movies
+    versioon: 0.0.1 SNAPSHOT
