@@ -1,8 +1,8 @@
 #Nombrando el microservicio.
 spring:
-  applicaltion:
+  application:
     name: serie-service
-  cloud:      #Configuracion centralizada a partir del Servidor de Configuracion.
+  cloud: #Configuracion centralizada a partir del Servidor de Configuracion.
     config:
       discovery:
         enabled: true

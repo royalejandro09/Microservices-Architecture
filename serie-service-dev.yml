@@ -4,15 +4,16 @@ server:
 spring:
   data:
     mongodb:
-      authentication-database: admin
-      username: rootuser
-      password: rootpass
+      authentication-database: 
+      username: 
+      password: 
       database: tp_final
       port: 27017
-      host: mongodb
+      host: localhost
 
 info:
   app:
     name: Serie Service
     description:  Service for Series
     versioon: 0.0.1 SNAPSHOT
+
