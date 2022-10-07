@@ -3,6 +3,7 @@ package com.ramv.movieservice.controllers;
 import com.ramv.movieservice.dtos.MovieDTO;
 import com.ramv.movieservice.services.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.parser.Part;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

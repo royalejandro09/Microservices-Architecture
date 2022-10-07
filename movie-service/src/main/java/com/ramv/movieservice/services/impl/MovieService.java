@@ -9,6 +9,7 @@ import com.ramv.movieservice.services.IMovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,9 +34,12 @@ public class MovieService implements IMovieService {
      * @param movie
      * @return
      */
+    @Transactional
     @Override
     public MovieDTO saveMovie(MovieDTO movie) {
         Movie entity = mapper.toEntity(movie);
+        entity.setGenre(entity.getGenre().toLowerCase());
+
         Movie movieBO = movieRepository.save(entity);
 
         MovieDTO dto = mapper.toDto(movieBO);
@@ -49,9 +53,10 @@ public class MovieService implements IMovieService {
      * @param genre
      * @return
      */
+    @Transactional(readOnly = true)
     @Override
     public List<MovieDTO> findByGenre(String genre) {
-        List<Movie> listMovieResponse = movieRepository.findByGenre(genre)
+        List<Movie> listMovieResponse = movieRepository.findByGenre(genre.toLowerCase())
                 .orElseThrow(() -> new MovieNotFoundException(String.format("The Movie with genre %s Not_Found", genre)));
 
         return mapper.listToDto(listMovieResponse);
@@ -62,6 +67,7 @@ public class MovieService implements IMovieService {
      *
      * @return
      */
+    @Transactional(readOnly = true)
     @Override
     public List<MovieDTO> getAllMovies() {
         List<Movie> listMovies = movieRepository.findAll();
