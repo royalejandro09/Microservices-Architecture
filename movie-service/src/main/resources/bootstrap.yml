@@ -1,7 +1,5 @@
 #Nombrando el microservicio.
 spring:
-  application:
-    name: movie-service
   cloud:      #Configuracion centralizada a partir del Servidor de Configuracion.
     config:
       discovery:
