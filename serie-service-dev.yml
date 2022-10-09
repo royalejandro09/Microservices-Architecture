@@ -4,12 +4,12 @@ server:
 spring:
   data:
     mongodb:
-      authentication-database: 
-      username: 
-      password: 
+      authentication-database: admin
+      username: rootuser
+      password: rootpass
       database: tp_final
       port: 27017
-      host: localhost
+      host: mongodb
 
 info:
   app:

@@ -4,7 +4,7 @@ import com.ramv.movieservice.dtos.MovieDTO;
 import com.ramv.movieservice.entities.Movie;
 import com.ramv.movieservice.exceptions.MovieNotFoundException;
 import com.ramv.movieservice.mappers.MovieMapper;
-import com.ramv.movieservice.repository.IMovieRepository;
+import com.ramv.movieservice.repositorys.IMovieRepository;
 import com.ramv.movieservice.services.IMovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

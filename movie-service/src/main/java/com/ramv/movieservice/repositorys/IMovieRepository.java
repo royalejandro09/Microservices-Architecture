@@ -1,4 +1,4 @@
-package com.ramv.movieservice.repository;
+package com.ramv.movieservice.repositorys;
 
 import com.ramv.movieservice.entities.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
