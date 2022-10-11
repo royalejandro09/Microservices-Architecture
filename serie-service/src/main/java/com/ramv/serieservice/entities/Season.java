@@ -1,6 +1,5 @@
 package com.ramv.serieservice.entities;
 
-
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -14,13 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Document
-public class Serie {
+public class Season {
 
     @Id
     private String id;
-    private String name;
-    private String genre;
+    private int seasonNumber;
     @DBRef
-    private List<Season> seasons;
-
+    private List<Chapter> chapters;
 }
