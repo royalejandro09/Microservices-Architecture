@@ -10,6 +10,13 @@ spring:
       port: 27017
       host: localhost
 
+#Exponiendo los endpoints de Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: *
+        
 info:
   app:
     name: Serie Service

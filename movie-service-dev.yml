@@ -15,6 +15,13 @@ spring:
     hibernate:
       ddl-auto: create-drop   
 
+#Exponiendo los endpoints de Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: *
+
 info:
   app:
     name: Movie Service
