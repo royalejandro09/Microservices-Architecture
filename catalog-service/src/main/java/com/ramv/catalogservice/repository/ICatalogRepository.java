@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CatalogRepository extends MongoRepository<Catalog, String> {
+public interface ICatalogRepository extends MongoRepository<Catalog, String> {
 
     Optional<Catalog> findByGenre(String genre);
 }
