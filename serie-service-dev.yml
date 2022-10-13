@@ -15,7 +15,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: info, health
+        include: info
 
 info:
   app:
