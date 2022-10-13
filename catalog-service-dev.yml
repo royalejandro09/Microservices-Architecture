@@ -1,0 +1,27 @@
+server:
+  port: 8084
+
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      username: admin
+      database: tp_final
+      port: 27017
+      host: localhost
+
+#Exponiendo los endpoints de Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: Catalog Service
+    description:  Service for Catalog
+    versioon: 0.0.1 SNAPSHOT
