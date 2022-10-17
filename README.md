@@ -65,10 +65,10 @@ en una base de datos no relacional de MongoDB con la siguiente estructura:
 -	Configurar el ruteo en el gateway para el nuevo servicio y agregar seguridad con OAuth.
 -	Configurar Server config para obtener la configuración desde un repositorio Git.
 -	Crear API que nos permita: 
-    - Obtener un listado de series por género. Endpoint: /series/{genre} [GET]
+    - Obtener un listado de series por género. Endpoint: ` /series/{genre} [GET] `
     - Agregar una nueva serie. Endpoint: /series [POST]
-- Obtener un listado de series por género. Endpoint: /series/{genre} [GET]
-- Agregar una nueva serie. Endpoint: /series [POST]
+- Obtener un listado de series por género. Endpoint: ` /series/{genre} [GET] `
+- Agregar una nueva serie. Endpoint: `/series [POST]`
 
 ### movie-service
 
@@ -78,7 +78,7 @@ en una base de datos no relacional de MongoDB con la siguiente estructura:
 
 ### catalog-service
 -	Actualizar el catálogo utilizando Feign de manera de agregar a este servicio la búsqueda de las series por género (serie-service) 
-y agregarlas a la respuesta del endpoint /catalog/{genre}.
+y agregarlas a la respuesta del endpoint `/catalog/{genre}`.
 -	Agregar persistencia: luego de obtener las películas y las series según género, persistir las mismas en MongoDB.
 -	Agregar RabbitMQ y escuchar los mensajes que envían movie-service y serie-service. En caso de recibir un mensaje de algún servicio, 
 actualizar el  listado correspondiente, ya sea las películas o las series.
