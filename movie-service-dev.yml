@@ -15,6 +15,27 @@ spring:
     hibernate:
       ddl-auto: create-drop   
 
+#Zipkin
+logging:
+      level.org.springframework.cloud: DEBUG
+    spring:
+      application:
+        name: service-tracking
+      sleuth:
+        enabled: false
+    zipkin:
+        storage:
+            type: mem
+    server:
+        port: 9411
+ sleuth:
+        enabled: true
+        sampler:
+          percentage: 1
+      zipkin:
+        enabled: true
+        baseUrl: http://${tracking-host:tracking}:9411  
+
 #Exponiendo los endpoints de Actuator
 management:
   endpoints:
