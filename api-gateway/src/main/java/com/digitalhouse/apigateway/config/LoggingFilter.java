@@ -12,7 +12,6 @@ import reactor.core.publisher.Mono;
 public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Config> {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoggingFilter.class);
-
     public LoggingFilter() {
         super(Config.class);
     }
