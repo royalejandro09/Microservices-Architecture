@@ -7,7 +7,9 @@ import com.ramv.movieservice.mappers.MovieMapper;
 import com.ramv.movieservice.repositorys.IMovieRepository;
 import com.ramv.movieservice.services.IMovieService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +23,15 @@ public class MovieService implements IMovieService {
 
     private final IMovieRepository movieRepository;
 
+    private RabbitTemplate rabbitTemplate;
+    @Value("${queue.movie.name}")
+    private String movieQueue;
+
     @Autowired
     public MovieService(MovieMapper mapper, IMovieRepository movieRepository) {
         this.mapper = mapper;
         this.movieRepository = movieRepository;
     }
-
 
     /**
      * Save Movie.
@@ -37,13 +42,13 @@ public class MovieService implements IMovieService {
     @Transactional
     @Override
     public MovieDTO saveMovie(MovieDTO movie) {
+
         Movie entity = mapper.toEntity(movie);
         entity.setGenre(entity.getGenre().toLowerCase());
 
         Movie movieBO = movieRepository.save(entity);
-
+        this.rabbitTemplate.convertAndSend(this.movieQueue, movie.getGenre());
         MovieDTO dto = mapper.toDto(movieBO);
-
         return dto;
     }
 
