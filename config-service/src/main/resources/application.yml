@@ -12,7 +12,14 @@ spring:
           #searchPaths: checkFinalBackend
 
 #Indicando la ruta de eureka para registrarse como cliente:
-#eureka:
- # client:
- #   service-url:
-#      defaultZone: http://eureka-service:8761/eureka/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+
+#Informacion de nuestro config-service.
+info:
+  app:
+    name: CONFIG-SERVICE
+    description: Config-server
+    version: 1.0.0
