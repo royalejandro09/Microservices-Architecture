@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,12 @@ public class SerieSerivice implements ISerieService {
         Serie response = serieRepository.save(serie);
         log.info(String.format("The %s series has been successfully saved!", serie.getName()));
         this.rabbitTemplate.convertAndSend(this.serieQueue, serie.getGenre());
+        return response;
+    }
+
+    @Override
+    public List<Serie>  getAllSeries() {
+        List<Serie> response = serieRepository.findAll();
         return response;
     }
 

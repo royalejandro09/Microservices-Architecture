@@ -10,7 +10,7 @@ spring:
   rabbitmq:
     username: guest
     password: guest
-    #host: rabbitmq
+    host: rabbitmq
     port: 5672
   profiles:
     active: dev

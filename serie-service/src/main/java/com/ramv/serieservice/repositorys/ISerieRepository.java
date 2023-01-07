@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ISerieRepository extends MongoRepository<Serie, String> {
 
+    List<Serie> findAll();
     Optional<List<Serie>> findByGenre(String genre);
 }

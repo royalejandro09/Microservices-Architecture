@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -24,13 +25,19 @@ public class CatalogService implements ICatalogService {
     private final IMovieClient movieClient;
     private final ISerieClient serieClient;
     private final ICatalogRepository catalogRepository;
-    private String genre;
 
     @Autowired
     public CatalogService(IMovieClient movieClient, ISerieClient serieClient, ICatalogRepository catalogRepository) {
         this.movieClient = movieClient;
         this.serieClient = serieClient;
         this.catalogRepository = catalogRepository;
+    }
+
+
+    @Override
+    public List<Catalog> fidAllCatalogs() {
+        List<Catalog> catalogs = catalogRepository.findAll();
+        return catalogs;
     }
 
     @Override
@@ -42,13 +49,20 @@ public class CatalogService implements ICatalogService {
                         String.format("Catalog with genre %s not found", genre.toLowerCase())));
     }
 
-    public Catalog findCatalogByGenreFallback(CallNotPermittedException exception){
-        Catalog catalog = new Catalog();
-        catalog.setId("Ups");
-        catalog.setGenre(this.genre);
-        catalog.setMoviesDto(new ArrayList<>());
-        catalog.setSeriesDto(new ArrayList<>());
-        return catalog;
+    private Catalog findCatalogByGenreFallback(CallNotPermittedException exception){
+       Optional<Catalog> catalogUps = catalogRepository.findByGenre("fail");
+
+       if (catalogUps.isPresent()){
+           return catalogUps.get();
+       }else{
+           Catalog catalog = new Catalog();
+           catalog.setId("Ups");
+           catalog.setGenre("fail");
+           catalog.setMoviesDto(new ArrayList<>());
+           catalog.setSeriesDto(new ArrayList<>());
+           catalogRepository.save(catalog);
+           return catalog;
+       }
     }
 
     @RabbitListener(queues = "${queue.movie.name}")

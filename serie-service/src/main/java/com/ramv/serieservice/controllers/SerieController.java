@@ -27,6 +27,12 @@ public class SerieController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Serie>> getAllSeries() {
+        List<Serie> series = serieSerive.getAllSeries();
+        return ResponseEntity.ok(series);
+    }
+
     @GetMapping("/{genre}")
     public ResponseEntity<List<Serie>> findByGenre(@PathVariable String genre) {
         String formatGenre = genre.toLowerCase();
