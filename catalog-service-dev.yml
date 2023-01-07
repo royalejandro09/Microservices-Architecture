@@ -8,6 +8,12 @@ spring:
       service-url:
         defaultZone:  http://eureka-service:8761/eureka
 
+  rabbitmq:
+    username: guest
+    password: guest
+    host: rabbitmq
+    port: 5672
+
   data:
     mongodb:
       authentication-database: admin
@@ -15,6 +21,12 @@ spring:
       database: tp_final
       port: 27017
       host: localhost
+
+queue:
+  movie:
+    name: Movie
+  serie:
+    name: Serie
 
 #Exponiendo los endpoints de Actuator
 management:
