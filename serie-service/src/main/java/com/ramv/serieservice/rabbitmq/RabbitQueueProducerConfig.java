@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitQueueConfig {
+public class RabbitQueueProducerConfig {
 
     @Value("${queue.serie.name}")
-    private String movieQueue;
+    private String serieQueue;
 
     @Bean
     public Queue queue(){
-        return new Queue(this.movieQueue, true);
+        return new Queue(this.serieQueue, true);
     }
 }

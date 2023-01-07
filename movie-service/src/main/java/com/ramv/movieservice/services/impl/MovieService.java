@@ -47,7 +47,8 @@ public class MovieService implements IMovieService {
         entity.setGenre(entity.getGenre().toLowerCase());
 
         Movie movieBO = movieRepository.save(entity);
-        this.rabbitTemplate.convertAndSend(this.movieQueue, movie.getGenre());
+        this.rabbitTemplate.convertAndSend(this.movieQueue, movieBO.getGenre());
+        log.info(String.format("The Movie %s was save successfully", movieBO.getName()));
         MovieDTO dto = mapper.toDto(movieBO);
         return dto;
     }

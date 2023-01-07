@@ -7,7 +7,14 @@ spring:
       discovery:
         enabled: true
         service-id: config-service
+  rabbitmq:
+    username: guest
+    password: guest
+    #host: rabbitmq
+    port: 5672
   profiles:
     active: dev
 
-
+queue:
+  serie:
+    name: Serie

@@ -11,6 +11,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -52,18 +53,20 @@ public class CatalogService implements ICatalogService {
 
     @RabbitListener(queues = "${queue.movie.name}")
     public void consumeMovieMessage(String message){
-        System.out.println("Genre movie update: " + message);
+        log.info(String.format("Genre movie update: " + message));
 
         Optional<Catalog> foundCatalog = this.catalogRepository.findByGenre(message);
 
         if(foundCatalog.isPresent()){
             foundCatalog.get().setMoviesDto(this.movieClient.getMoviesByGenre(message));
             this.catalogRepository.save(foundCatalog.get());
+            log.info(String.format("Catalog movie with genre %s update", message));
         }else{
             Catalog catalog = new Catalog();
             catalog.setGenre(message);
             catalog.setMoviesDto(this.movieClient.getMoviesByGenre(message));
             this.catalogRepository.save(catalog);
+            log.info(String.format("Catalog movie with genre %s created", message));
         }
     }
 
@@ -76,11 +79,13 @@ public class CatalogService implements ICatalogService {
         if(foundCatalog.isPresent()){
             foundCatalog.get().setSeriesDto(this.serieClient.getSerieByGenre(message));
             this.catalogRepository.save(foundCatalog.get());
+            log.info(String.format("Catalog serie with genre %s update", message));
         }else{
             Catalog catalog = new Catalog();
             catalog.setGenre(message);
             catalog.setSeriesDto(this.serieClient.getSerieByGenre(message));
             this.catalogRepository.save(catalog);
+            log.info(String.format("Catalog serie with genre %s created", message));
         }
     }
 }

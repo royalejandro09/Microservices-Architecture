@@ -10,14 +10,14 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitTemplateConfig {
 
     @Bean
-    public Jackson2JsonMessageConverter getJackson2JsonMessageConverter(){
+    public Jackson2JsonMessageConverter producerJackson2JsonMessageConverter(){
         return new Jackson2JsonMessageConverter();
     }
 
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(getJackson2JsonMessageConverter());
+        rabbitTemplate.setMessageConverter(producerJackson2JsonMessageConverter());
         return rabbitTemplate;
     }
 }
