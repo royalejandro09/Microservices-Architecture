@@ -13,8 +13,8 @@ spring:
     password: guest
     host: rabbitmq
     port: 5672
-    profiles:
-      active: dev
+  profiles:
+    active: dev
 
 queue:
   movie:
