@@ -8,6 +8,12 @@ spring:
       service-url:
         defaultZone:  http://eureka-service:8761/eureka
 
+  rabbitmq:
+    username: guest
+    password: guest
+    host: rabbitmq
+    port: 5672
+
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;
@@ -20,6 +26,10 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
+
+queue:
+  movie:
+    name: Movie
 
 #Exponiendo los endpoints de Actuator
 management:
