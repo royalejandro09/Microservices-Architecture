@@ -11,7 +11,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 @RequestMapping("/fallback")
 public class FallbackController {
 
-    @CircuitBreaker(name = "moviesService")
+    @CircuitBreaker(name = "movieService")
     @GetMapping("/movie")
     public ResponseEntity<String> moviesFallback() {
         return new ResponseEntity<>("Servidor de movies no está disponible actualmente", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -23,7 +23,7 @@ public class FallbackController {
         return new ResponseEntity<>("Servidor de catalogos no está disponible actualmente", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @CircuitBreaker(name = "seriesService")
+    @CircuitBreaker(name = "serieService")
     @GetMapping("/serie")
     public ResponseEntity<String> seriesFallback() {
         return new ResponseEntity<>("Servidor de series no está disponible actualmente", HttpStatus.INTERNAL_SERVER_ERROR);
