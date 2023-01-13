@@ -9,9 +9,3 @@ spring:
         service-id: config-service
   profiles:
     active: dev
-
-queue:
-  movie:
-    name: Movie
-  serie:
-    name: Serie

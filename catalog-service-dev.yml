@@ -37,6 +37,35 @@ management:
   info:
     env:
       enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+
+#Configurando el Circuit-breaker para los llamados http usando los clientes feign de Movies y Series
+resilience4j:
+  circuitbreaker:
+    instances:
+      catalog:
+        allowHealthIndicatorToFail: false
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+
+#Configuracion del mecanismo de reintentos
+  retry:
+    instances:
+      catalog:
+        maxAttempts: 3
+        waitDuration: 1000
+        retryExceptions[0]: feign.FeignException$InternalServerError
 
 info:
   app:

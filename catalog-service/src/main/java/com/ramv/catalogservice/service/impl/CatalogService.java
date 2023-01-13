@@ -41,7 +41,6 @@ public class CatalogService implements ICatalogService {
     }
 
     @Override
-    @CircuitBreaker(name="catalog", fallbackMethod = "findCatalogByGenreFallback")
     public Catalog findCatalogByGenre(String genre) throws CatalogNotFoundException {
         Optional<Catalog> foundCatalog = catalogRepository.findByGenre(genre.toLowerCase());
         return foundCatalog.isPresent() ? foundCatalog.get() :
@@ -49,23 +48,8 @@ public class CatalogService implements ICatalogService {
                         String.format("Catalog with genre %s not found", genre.toLowerCase())));
     }
 
-    private Catalog findCatalogByGenreFallback(CallNotPermittedException exception){
-       Optional<Catalog> catalogUps = catalogRepository.findByGenre("fail");
-
-       if (catalogUps.isPresent()){
-           return catalogUps.get();
-       }else{
-           Catalog catalog = new Catalog();
-           catalog.setId("Ups");
-           catalog.setGenre("fail");
-           catalog.setMoviesDto(new ArrayList<>());
-           catalog.setSeriesDto(new ArrayList<>());
-           catalogRepository.save(catalog);
-           return catalog;
-       }
-    }
-
     @RabbitListener(queues = "${queue.movie.name}")
+    @CircuitBreaker(name="catalog", fallbackMethod = "findCatalogByGenreFallback")
     public void consumeMovieMessage(String message){
         log.info(String.format("Genre movie update: " + message));
 
@@ -85,6 +69,7 @@ public class CatalogService implements ICatalogService {
     }
 
     @RabbitListener(queues = "${queue.serie.name}")
+    @CircuitBreaker(name="catalog", fallbackMethod = "findCatalogByGenreFallback")
     public void consumeSerieMessage(String message){
         System.out.println("Genre serie update: " + message);
 
@@ -100,6 +85,22 @@ public class CatalogService implements ICatalogService {
             catalog.setSeriesDto(this.serieClient.getSerieByGenre(message));
             this.catalogRepository.save(catalog);
             log.info(String.format("Catalog serie with genre %s created", message));
+        }
+    }
+
+    private Catalog findCatalogByGenreFallback(CallNotPermittedException exception){
+        Optional<Catalog> catalogUps = catalogRepository.findByGenre("fail");
+
+        if (catalogUps.isPresent()){
+            return catalogUps.get();
+        }else{
+            Catalog catalog = new Catalog();
+            catalog.setId("Ups");
+            catalog.setGenre("fail");
+            catalog.setMoviesDto(new ArrayList<>());
+            catalog.setSeriesDto(new ArrayList<>());
+            catalogRepository.save(catalog);
+            return catalog;
         }
     }
 }
