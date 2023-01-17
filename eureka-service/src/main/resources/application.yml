@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: eureka-service
+  zipkin:
+    enabled: true
+    baseUrl: http://localhost:9411
 
 #Configuracion para que no se autoregistre como cliente.
 eureka:
