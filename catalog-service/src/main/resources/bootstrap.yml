@@ -9,3 +9,9 @@ spring:
         service-id: config-service
   profiles:
     active: dev
+
+#Configuracion para registrarse en eureka.
+  eureka:
+    client:
+      service-url:
+        defaultZone:  http://eureka-service:8761/eureka
