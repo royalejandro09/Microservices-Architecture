@@ -1,0 +1,17 @@
+#Configuracion general para todos los proyestos.
+spring:
+  zipkin:
+    enabled: true
+    baseUrl: http://zipkin:9411
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+  endpoint:
+    info:
+      enabled: true
