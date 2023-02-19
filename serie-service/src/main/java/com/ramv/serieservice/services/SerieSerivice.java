@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 @Service
 public class SerieSerivice implements ISerieService {
 
-    private final ISerieRepository serieRepository;
-    private final ISeasonRepository seasonRepository;
-    private final IChapterRepository chapterRepository;
     @Value("${queue.serie.name}")
     private String serieQueue;
     private RabbitTemplate rabbitTemplate;
+    private final ISerieRepository serieRepository;
+    private final ISeasonRepository seasonRepository;
+    private final IChapterRepository chapterRepository;
 
     @Autowired
     public SerieSerivice(ISerieRepository serieRepository, ISeasonRepository seasonRepository, IChapterRepository chapterRepository,

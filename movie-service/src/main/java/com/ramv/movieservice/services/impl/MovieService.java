@@ -20,17 +20,17 @@ import java.util.List;
 public class MovieService implements IMovieService {
 
     private final MovieMapper mapper;
-
-    private final IMovieRepository movieRepository;
-
-    private RabbitTemplate rabbitTemplate;
     @Value("${queue.movie.name}")
     private String movieQueue;
+    private RabbitTemplate rabbitTemplate;
+    private final IMovieRepository movieRepository;
 
     @Autowired
-    public MovieService(MovieMapper mapper, IMovieRepository movieRepository) {
+    public MovieService(MovieMapper mapper, IMovieRepository movieRepository,
+                        RabbitTemplate rabbitTemplate) {
         this.mapper = mapper;
         this.movieRepository = movieRepository;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     /**
