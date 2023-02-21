@@ -9,6 +9,10 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+  modngodb:
+    image: mongo:4.4.19-rc2-windowsservercore-ltsc2022
+    ports:
+      - "27017:27017"
   eureka-service:
     image: eureka-service
     ports:

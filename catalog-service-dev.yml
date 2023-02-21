@@ -13,8 +13,8 @@ spring:
       authentication-database: admin
       username: admin
       database: tp_final
+      host: mongodb
       port: 27017
-      host: localhost
 
 queue:
   movie:
