@@ -9,6 +9,7 @@ import com.ramv.catalogservice.service.ICatalogService;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,11 +88,11 @@ public class CatalogService implements ICatalogService {
         }
     }
 
-    private Catalog findCatalogByGenreFallback(CallNotPermittedException exception){
+    private void findCatalogByGenreFallback(CallNotPermittedException exception){
         Optional<Catalog> catalogUps = catalogRepository.findByGenre("fail");
 
         if (catalogUps.isPresent()){
-            return catalogUps.get();
+            log.info("El catalog de error ya ha sido creado");
         }else{
             Catalog catalog = new Catalog();
             catalog.setId("Ups");
@@ -99,7 +100,7 @@ public class CatalogService implements ICatalogService {
             catalog.setMoviesDto(new ArrayList<>());
             catalog.setSeriesDto(new ArrayList<>());
             catalogRepository.save(catalog);
-            return catalog;
+            log.info("El catalog fue creado exitosamente");
         }
     }
 }
